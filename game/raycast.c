@@ -44,17 +44,21 @@ void	ft_vertical_ray(t_data *a, t_ray *ray)
 
 void	ft_vertical_ray_sub(t_data *a, t_ray *ray)
 {
-	int	mx;
-	int	my;
+	int		mx;
+	int		my;
+	char	c;
 
 	while (ray->dof < a->map_width)
 	{
 		mx = (int)ray->rx >> 6;
 		my = (int)ray->ry >> 6;
-		if (get_map_symbol(mx, my, a) == '1')
+		c = get_map_symbol(mx, my, a);
+		if (c == '1' || c == 'D')
 		{
 			a->dist = ft_distance(ray);
 			a->side = ray->side;
+			if (c == 'D')
+				a->side = 6;
 			ray->dof = a->map_width;
 		}
 		else
@@ -103,17 +107,21 @@ void	ft_horisontal_ray_sub(t_data *a, t_ray *ray)
 	int		mx;
 	int		my;
 	double	disth;
+	char	c;
 
 	while (ray->dof < a->map_height)
 	{
 		mx = (int)ray->rx >> 6;
 		my = (int)ray->ry >> 6;
-		if (get_map_symbol(mx, my, a) == '1')
+		c = get_map_symbol(mx, my, a);
+		if (c == '1' || c == 'D')
 		{
 			disth = ft_distance(ray);
 			if (disth < a->dist)
 			{
 				a->side = ray->sideh;
+				if (c == 'D')
+					a->side = 6;
 				a->dist = disth;
 			}
 			else
@@ -149,10 +157,10 @@ void	ft_ray_cast(t_data *a)
 		ft_horisontal_ray(a, &ray);
 		ft_horisontal_ray_sub(a, &ray);
 		a->dist = a->dist * cos(degree_to_radian(fix_angle(a->pa - ray.ra)));
-		if (a->side > 3)
-			a->rx = (int)(ray.vy) % 64;
+		if (a->side > 3 && a->side != 6)
+			a->ray = (int)(ray.vy) % 64;
 		else
-			a->rx = (int)(ray.rx) % 64;
+			a->ray = (int)(ray.rx) % 64;
 		draw_line(a, i);
 		ray.ra = fix_angle(ray.ra - ANGLE);
 		i++;

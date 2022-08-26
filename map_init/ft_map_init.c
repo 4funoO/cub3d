@@ -6,35 +6,11 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:02:47 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/22 16:51:21 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/26 16:32:11 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
-
-int	ft_map_line_check(char *line, t_data *a)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] && line[i] != '\n')
-	{
-		if (line[i] == 'N' || line[i] == 'S'
-			|| line[i] == 'E' || line[i] == 'W')
-		{
-			if (a->player != '\0')
-				ft_error("More than one player!\n", a);
-			a->player = line[i];
-			a->px = i + 0.5;
-			a->py = a->map_height + 0.5;
-			line[i] = '0';
-		}
-		else if (line[i] != ' ' && line[i] != '1' && line[i] != '0')
-			ft_error("Invalid Map!\n", a);
-		i++;
-	}
-	return (i);
-}
 
 void	ft_check_edges(char *s, t_data *a)
 {
@@ -49,6 +25,30 @@ void	ft_check_edges(char *s, t_data *a)
 		i++;
 	if (s[i] && s[i] != '\n')
 		ft_error("Invalid Map!\n", a);
+}
+
+void	put_doors_and_keys(char *s, char *s2, char *s3, t_data *a)
+{
+	int	i;
+
+	i = a->side;
+	if (s2[i - 1] == ' ' || s2[i + 1] == ' ' || !s2[i + 1]
+		|| s2[i + 1] == '\n' || s[i + 1] == '\n' || !s[i + 1]
+		|| s[i - 1] == ' ' || s[i + 1] == ' ' || s[i] == ' '
+		|| s3[i - 1] == ' ' || s3[i + 1] == ' ' || s3[i] == ' '
+		|| s3[i + 1] == '\n' || !s3[i + 1])
+		ft_error("Invalid Map!\n", a);
+	if (s2[i] == '0' && s2[i + 1] == '1' && s2[i - 1] == '1'
+		&& s[i] == '0' && s3[i] == '0' && (s[i + 1] == '1' || s3[i + 1] == '1'))
+		s2[i] = 'D';
+	else if (a->key_num == '0' && s2[i] == '0' && s2[i - 1] == '0'
+		&& s2[i + 1] == '0' && s[i - 1] == '0' && s[i] == '0' && s[i + 1] == '0'
+		&& s3[i] == '0' && s3[i + 1] == '0' && s3[i - 1] == '0')
+	{
+		a->key_num = '1';
+		s2[i] = 'K';
+		a->sprite_x = i;
+	}
 }
 
 void	ft_check_maplines(char *s, char *s2, char *s3, t_data *a)
@@ -66,12 +66,8 @@ void	ft_check_maplines(char *s, char *s2, char *s3, t_data *a)
 			i++;
 		if (s2[i] && s2[i] != '\n')
 		{
-			if (s2[i - 1] == ' ' || s2[i + 1] == ' ' || !s2[i + 1]
-				|| s2[i + 1] == '\n' || s[i + 1] == '\n' || !s[i + 1]
-				|| s[i - 1] == ' ' || s[i + 1] == ' ' || s[i] == ' '
-				|| s3[i - 1] == ' ' || s3[i + 1] == ' ' || s3[i] == ' '
-				|| s3[i + 1] == '\n' || !s3[i + 1])
-				ft_error("Invalid Map!\n", a);
+			a->side = i;
+			put_doors_and_keys(s, s2, s3, a);
 			i++;
 		}
 	}
@@ -99,32 +95,7 @@ void	ft_map_check(t_list	*tmp, t_data *a)
 		tmp = tmp->next;
 		tmp2 = tmp2->next;
 		tmp3 = tmp3->next;
+		if (a->key_num == '0')
+			a->sprite_y++;
 	}
-}
-
-void	ft_map_init(char *line, t_data *a, int fd)
-{
-	int		i;
-
-	while (line)
-	{
-		i = 0;
-		while (line[i] && line[i] == ' ')
-			i++;
-		if (!line[i] || line[i] == '\n')
-		{
-			free(line);
-			a->line = NULL;
-			break ;
-		}
-		i = ft_map_line_check(line, a);
-		if (i > a->map_width)
-			a->map_width = i;
-		ft_lstadd_back(&a->map, ft_lstnew(ft_strtrim(line, "\n")));
-		free(line);
-		a->line = NULL;
-		line = get_next_line(fd);
-		a->map_height++;
-	}
-	ft_map_check(a->map, a);
 }

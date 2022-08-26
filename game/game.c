@@ -6,13 +6,34 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:22:25 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/25 19:59:29 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/26 16:30:14 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
 
-void	ft_img_render(t_data *a)
+
+void	img_render_door(t_data *a)
+{
+	int		i;
+
+	i = 64;
+	a->door = mlx_xpm_file_to_image(a->mlx, "img/door.xpm", &i, &i);
+	a->addr[6] = mlx_get_data_addr(a->door, &a->bits_per_pixel[6],
+			&a->line_length[6], &a->endian[6]);
+	a->key = mlx_xpm_file_to_image(a->mlx, "img/key.xpm", &i, &i);
+	a->addr[7] = mlx_get_data_addr(a->key, &a->bits_per_pixel[7],
+			&a->line_length[7], &a->endian[7]);
+	if (!a->ea || !a->so || !a->we || !a->no || !a->key || !a->door)
+	{
+		write(2, "Error!\nImage file is missing or unavailable!\n", 45);
+		ft_lstfree(a->map);
+		free(a->mlx);
+		exit(EXIT_FAILURE);
+	}
+}
+
+void	img_render_walls(t_data *a)
 {
 	int		i;
 	char	*tmp;
@@ -38,13 +59,6 @@ void	ft_img_render(t_data *a)
 	a->addr[5] = mlx_get_data_addr(a->ea, &a->bits_per_pixel[5],
 			&a->line_length[5], &a->endian[5]);
 	free(tmp);
-	if (!a->ea || !a->so || !a->we || !a->no)
-	{
-		write(2, "Error!\nImage file is missing or unavailable!\n", 45);
-		ft_lstfree(a->map);
-		free(a->mlx);
-		exit(EXIT_FAILURE);
-	}
 }
 
 void	ft_check_map_init(t_data *a)
@@ -78,10 +92,12 @@ void	ft_check_map_init(t_data *a)
 void	ft_game(t_data *a)
 {
 	ft_check_map_init(a);
+	a->key_num = KEY;
 	a->pdx = cos(degree_to_radian(a->pa));
 	a->pdy = -1 * sin(degree_to_radian(a->pa));
 	a->mlx = mlx_init();
-	ft_img_render(a);
+	img_render_walls(a);
+	img_render_door(a);
 	a->win = mlx_new_window(a->mlx, WIDTH, HEIGHT, "Cube3D");
 	mlx_mouse_hide();
 	mlx_hook(a->win, 17, 0, ft_close, a);

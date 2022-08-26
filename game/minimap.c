@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:30:22 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/25 11:46:11 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/26 13:01:37 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	ft_sub_minimap(t_list *map, t_data *a, float x, float y)
 		{
 			if (line[(int)x + i] == '1')
 				ft_wall_minimap(a, i, j, 0x9A228B22);
+			else if (line[(int)x + i] == 'D')
+				ft_wall_minimap(a, i, j, 0x9A966F33);
 			else
 				ft_wall_minimap(a, i, j, 0xFF000000);
 			i++;

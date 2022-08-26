@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 12:44:15 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/25 12:07:15 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/26 12:16:48 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@ void	ft_lstfree(t_list *map)
 		map = n1;
 	}
 }
+
 void	ft_free_addr(char **addr)
 {
 	int	i;
 
+	if (addr == NULL)
+		return ;
 	i = 0;
-	while (i < 6)
+	while (i < 8)
 	{
 		free(addr[i]);
 		addr[i] = NULL;
@@ -44,26 +47,12 @@ void	ft_free_addr(char **addr)
 
 void	ft_free(t_data *a)
 {
-	if (a->map)
-		ft_lstfree(a->map);
-	a->map = NULL;
-	if (a->line)
-		free(a->line);
-	a->line = NULL;
-	if (a->mlx)
-		free(a->mlx);
-	a->mlx = NULL;
+	ft_lstfree(a->map);
 	if (a->img)
-		free(a->img);
-	a->img = NULL;
-	if (a->minimap)
-		free(a->minimap);
-	a->minimap = NULL;
+		mlx_destroy_image(a->mlx, a->img);
+	free(a->mlx);
 	ft_free_addr(a->addr);
-	free(a->no);
-	free(a->ea);
-	free(a->we);
-	free(a->so);
+	free(a->line);
 }
 
 void	ft_error(char *s, t_data *a)
@@ -77,7 +66,7 @@ void	ft_error(char *s, t_data *a)
 int	ft_close(t_data *a)
 {
 	mlx_destroy_window(a->mlx, a->win);
-	ft_lstfree(a->map);
-	free(a->mlx);
+	ft_free(a);
+	// system("leaks cub3d");
 	exit(EXIT_SUCCESS);
 }

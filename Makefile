@@ -6,7 +6,7 @@
 #    By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 13:29:01 by doreshev          #+#    #+#              #
-#    Updated: 2022/08/25 19:46:36 by doreshev         ###   ########.fr        #
+#    Updated: 2022/08/26 17:25:30 by doreshev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRC =	cube3d.c \
 		game/raycast.c \
 		game/game_utils.c \
 		game/raycast_sub.c \
-		game/keys_left_right.c \
+		game/keys_rotate.c \
 
 OBJ = ${SRC:.c=.o}
 DEP = ${SRC:.c=.d}
@@ -56,7 +56,7 @@ bonus: all
 clean:
 	${RM} ${OBJ} ${DEP}
 	@cd $(LIBFTDIR) && $(MAKE) clean
-	@cd $(LIBFTDIR) && $(MAKE) clean
+	@cd $(MLXDIR) && $(MAKE) clean
 
 fclean: clean
 	${RM} ${NAME}

@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:26 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/25 13:25:02 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/26 17:26:07 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ int	ft_game_start(t_data *a)
 	x = a->mouse_x;
 	mlx_mouse_get_pos(a->win, &a->mouse_x, &a->mouse_y);
 	if (a->mouse_x > x)
-		d_key(a);
+		right_key(a);
 	else if (a->mouse_x < x)
-		a_key(a);
+		left_key(a);
 	if (a->mouse_x > WIDTH || a->mouse_x < 0)
-		mlx_mouse_move(a->win, 400, 400);
+		mlx_mouse_move(a->win, X_HALF, Y_HALF);
+	if (a->open == '1' && a->step_num > 15 && ((int)a->px != a->d_x || (int)a->py != a->d_y))
+		put_map_symbol(a->d_x, a->d_y, a, 'D');
 	return (0);
 }
