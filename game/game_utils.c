@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 10:57:54 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/26 15:11:44 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/27 15:21:51 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ double	ft_distance(t_ray *ray)
 	return (cos(degree_to_radian(ray->ra)) * (ray->rx - ray->px) 
 		- sin(degree_to_radian(ray->ra)) * (ray->ry - ray->py));
 }
-
 
 void	put_map_symbol(int mx, int my, t_data *a, char c)
 {

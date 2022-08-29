@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast_sub.c                                      :+:      :+:    :+:   */
+/*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 13:42:37 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/26 14:26:13 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/27 16:52:00 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	draw_line(t_data *a, int i)
 	int	lineoff;
 	int	k;
 
-	k = -1;
 	lineh = (HEIGHT << 5) / a->dist;
 	a->stepy = 0;
 	a->linelen = lineh;
@@ -58,6 +57,7 @@ void	draw_line(t_data *a, int i)
 		lineh = HEIGHT;
 	}
 	lineoff = (HEIGHT - lineh) >>1;
+	k = -1;
 	y = 0;
 	while (y < HEIGHT)
 	{

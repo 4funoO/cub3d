@@ -6,14 +6,13 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:22:25 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/26 16:30:14 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/27 18:04:13 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
 
-
-void	img_render_door(t_data *a)
+void	take_img_door(t_data *a)
 {
 	int		i;
 
@@ -33,7 +32,7 @@ void	img_render_door(t_data *a)
 	}
 }
 
-void	img_render_walls(t_data *a)
+void	take_img_walls(t_data *a)
 {
 	int		i;
 	char	*tmp;
@@ -92,12 +91,21 @@ void	ft_check_map_init(t_data *a)
 void	ft_game(t_data *a)
 {
 	ft_check_map_init(a);
-	a->key_num = KEY;
 	a->pdx = cos(degree_to_radian(a->pa));
 	a->pdy = -1 * sin(degree_to_radian(a->pa));
+	a->key_num = '1';
+	if (a->sprite_x > 0)
+	{
+		a->key_num = '0';
+		a->sprite = '1';
+	}
+	if (KEYS == '1')
+		a->key_num = '1';
+	a->sprite_x = (int)a->sprite_x << 6;
+	a->sprite_y = (int)a->sprite_y << 6;
 	a->mlx = mlx_init();
-	img_render_walls(a);
-	img_render_door(a);
+	take_img_walls(a);
+	take_img_door(a);
 	a->win = mlx_new_window(a->mlx, WIDTH, HEIGHT, "Cube3D");
 	mlx_mouse_hide();
 	mlx_hook(a->win, 17, 0, ft_close, a);

@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 12:43:18 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/26 18:01:51 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/27 19:06:16 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	w_key(t_data *a)
 		if (c == 'K')
 		{
 			a->key_num = '1';
+			a->sprite = '0';
 			put_map_symbol(mx, my, a, '0');
 		}
 		a->px += a->pdx * 0.2;
@@ -49,6 +50,7 @@ void	s_key(t_data *a)
 		if (c == 'K')
 		{
 			a->key_num = '1';
+			a->sprite = '0';
 			put_map_symbol(mx, my, a, '0');
 		}
 		a->px -= a->pdx * 0.2;
@@ -72,6 +74,7 @@ void	a_key(t_data *a)
 		if (c == 'K')
 		{
 			a->key_num = '1';
+			a->sprite = '0';
 			put_map_symbol(mx, my, a, '0');
 		}
 		a->px += a->pdy * 0.2;
@@ -95,6 +98,7 @@ void	d_key(t_data *a)
 		if (c == 'K')
 		{
 			a->key_num = '1';
+			a->sprite ='0';
 			put_map_symbol(mx, my, a, '0');
 		}
 		a->px -= a->pdy * 0.2;

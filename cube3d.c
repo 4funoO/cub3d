@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:29:09 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/26 16:26:31 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/29 13:33:49 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ void	ft_map_initialize(t_data *a)
 	a->door = NULL;
 	a->mouse = '\0';
 	a->key_num = '0';
+	a->sprite = '0';
 	a->sprite_y = 1;
+	a->sprite_z = 20;
 	a->d_x = -1;
 	a->d_y = -1;
 	while (i < 8)
@@ -78,13 +80,6 @@ int	main()//int argc, char **argv)
 		if (!ft_check_format(argv[1], ".cub"))
 			ft_error("Wrong map format!\n", &a);
 		ft_map_process(&a, argv[1]);
-		// while (a.map != NULL)
-		// {
-		// 	printf("%s\n", a.map->content);
-		// 	a.map = a.map->next;
-		// }
-		// printf("px: %f, py: %f\n", a.px, a.py);
-		// printf("x: %i, y: %i\n", a.sprite_x, a.sprite_y);
 		ft_game(&a);
 	}
 	else

@@ -140,29 +140,29 @@ void	ft_horisontal_ray_sub(t_data *a, t_ray *ray)
 	}
 }
 
-void	ft_ray_cast(t_data *a)
+void	ft_ray_cast(t_data *a, t_ray *ray)
 {
-	t_ray	ray;
 	int		i;
 
-	ray.ra = fix_angle(a->pa + 30);
+	ray->ra = fix_angle(a->pa + 30);
 	i = 0;
-	ray.px = a->px * 64;
-	ray.py = a->py * 64;
+	ray->px = a->px * 64;
+	ray->py = a->py * 64;
 	while (i < WIDTH)
 	{
 		a->dist = 1000000;
-		ft_vertical_ray(a, &ray);
-		ft_vertical_ray_sub(a, &ray);
-		ft_horisontal_ray(a, &ray);
-		ft_horisontal_ray_sub(a, &ray);
-		a->dist = a->dist * cos(degree_to_radian(fix_angle(a->pa - ray.ra)));
+		ft_vertical_ray(a, ray);
+		ft_vertical_ray_sub(a, ray);
+		ft_horisontal_ray(a, ray);
+		ft_horisontal_ray_sub(a, ray);
+		a->dist = a->dist * cos(degree_to_radian(fix_angle(a->pa - ray->ra)));
 		if (a->side > 3 && a->side != 6)
-			a->ray = (int)(ray.vy) % 64;
+			a->ray = (int)(ray->vy) % 64;
 		else
-			a->ray = (int)(ray.rx) % 64;
+			a->ray = (int)(ray->rx) % 64;
 		draw_line(a, i);
-		ray.ra = fix_angle(ray.ra - ANGLE);
+		draw_sprite(a, ray, i);
+		ray->ra = fix_angle(ray->ra - ANGLE);
 		i++;
 	}
 }

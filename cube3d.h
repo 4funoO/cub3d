@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:29:19 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/26 17:51:33 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/29 13:49:57 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@
 # define HEIGHT   1000
 # define WIDTH    1000
 # define ANGLE    60.0 / WIDTH
-# define X_STR	  WIDTH * 0.95
-# define Y_STR	  HEIGHT >> 5
-# define X_HALF	  WIDTH >> 1
-# define Y_HALF	  HEIGHT >> 1
-# define KEY      '1'
+# define X_SPR    WIDTH >> 3
+# define Y_SPR    HEIGHT >> 3
+# define KEYS     '1'
 
 # include "libft/libft.h"
 # include "mlx/mlx.h"
@@ -46,9 +44,9 @@ typedef struct s_ray {
 }				t_ray;
 
 typedef struct s_sprite {
-	double	sx;
-	double	sy;
-	double	sz;
+	double	x;
+	double	y;
+	double	z;
 }				t_sprite;
 
 typedef struct s_data {
@@ -90,10 +88,11 @@ typedef struct s_data {
 	int		d_y;
 	int		step_num;
 	char	open;
-	int		sprite;
-	int		sprite_x;
-	int		sprite_y;
-	int		sprite_z;
+	char	sprite;
+	double	sprite_x;
+	double	sprite_y;
+	double	sprite_z;
+	double	spr_step;
 	t_list	*map;
 }				t_data;
 
@@ -107,14 +106,16 @@ void	ft_check_parameters(t_data *a, char *line, int fd);
 void	ft_map_check(t_list	*tmp, t_data *a);
 void	ft_map_init(char *line, t_data *a, int fd);
 
+void	ft_minimap_render(t_list *map, t_data *a);
+void	draw_sprite(t_data *a, t_ray *ray, int i);
 int		ft_game_start(t_data *a);
 void	ft_game(t_data *a);
 int		ft_key_hook(int keycode, t_data *a);
-void	ft_minimap_render(t_list *map, t_data *a);
-void	ft_ray_cast(t_data *a);
+void	ft_ray_cast(t_data *a, t_ray *ray);
 void	draw_line(t_data *a, int i);
 char	get_map_symbol(int	mx, int my, t_data *a);
 void	put_map_symbol(int mx, int my, t_data *a, char c);
+void	my_mlx_pixel_put(t_data *a, int x, int y, int color);
 double	ft_distance(t_ray *ray);
 double	degree_to_radian(double a) ;
 double	fix_angle(double a);

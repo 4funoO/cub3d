@@ -6,12 +6,11 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:28:48 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/26 17:52:22 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/27 13:16:28 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
-
 
 void	right_key(t_data *a)
 {
