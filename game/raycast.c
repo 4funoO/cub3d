@@ -161,7 +161,7 @@ void	ft_ray_cast(t_data *a, t_ray *ray)
 		else
 			a->ray = (int)(ray->rx) % 64;
 		draw_line(a, i);
-		draw_sprite(a, ray, i);
+		draw_sprite(a, i);
 		ray->ra = fix_angle(ray->ra - ANGLE);
 		i++;
 	}

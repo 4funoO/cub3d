@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:02:47 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/27 17:16:28 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/30 12:00:37 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	put_doors_and_keys(char *s, char *s2, char *s3, t_data *a)
 	{
 		a->key_num = '1';
 		s2[i] = 'K';
-		a->sprite_x = i;
+		a->s_px = i;
 	}
 }
 
@@ -96,6 +96,6 @@ void	ft_map_check(t_list	*tmp, t_data *a)
 		tmp2 = tmp2->next;
 		tmp3 = tmp3->next;
 		if (a->key_num == '0')
-			a->sprite_y++;
+			a->s_py++;
 	}
 }

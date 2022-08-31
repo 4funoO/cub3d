@@ -6,86 +6,70 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 14:14:05 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/29 15:29:58 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:43:21 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
 
-void	put_sprite_pixel(t_data *a, int x, int y, int k)
+void	put_sprite_pixel(t_data *a, int x, int y)
 {
 	char	*dst;
 	int		i;
 	int		j;
 
-
-	if (a->sprite_y <= 0 || a->linelen == 0)
-		return ;
-	i = (int)a->sprite_x % 64;
-	k = k + a->spr_step;
-	j = (k << 6) / a->linelen;
+	i = (int)a->t_x;
+	j = (int)a->t_y;
 	dst = a->addr[7] + ((j * a->line_length[7])
 		+ i * (a->bits_per_pixel[7] / 8));
-	my_mlx_pixel_put(a, x, y, *(unsigned int *)dst);
+	if (*(unsigned int *)dst != 0x000FF00FF)
+		my_mlx_pixel_put(a, x, y, *(unsigned int *)dst);
 }
 
-void	draw_sprite_line(t_data *a, int i)
-{
-	int	lineoff;
-	int	lineh;
-	int	y;
-	int	k;
-
-	lineh = (HEIGHT << 5) / a->sprite_y;
-	a->linelen = lineh;
-	if (lineh > HEIGHT >> 1)
-	{
-		a->spr_step = ((lineh - HEIGHT));
-		lineh = HEIGHT;
-	}
-	lineoff = (HEIGHT - lineh) >> 2;
-	k = -1;
-	y = 0;
-	while (y < HEIGHT)
-	{
-		if (y > lineoff && y < lineh + lineoff)
-			put_sprite_pixel(a, i, y, k++);
-		y++;
-	}
-}
-
-void	draw_sprite(t_data *a, t_ray *ray, int i)
+void	sprite_init(t_data *a)
 {
 	t_sprite	spr;
-	double		sn;
-	double		cs;
-	double		x;
-	double		y;
 
 	if (a->sprite == '0')
 		return ;
-	spr.x = a->sprite_x;
-	spr.y = a->sprite_y;
-	a->sprite_z = 10;
-	cs = cos(degree_to_radian(ray->ra));
-	sn = sin(degree_to_radian(ray->ra));
-	x = a->sprite_x - ray->px;
-	y = a->sprite_y - ray->py;
-	a->sprite_x = y * cs + x * sn;
-	a->sprite_y = x * cs - y * sn;
-	a->spr_step = (HEIGHT) / a->sprite_y;
-	if (a->spr_step < 0)
-		a->spr_step = 0;
-	else if (a->spr_step > WIDTH >> 3)
-		a->spr_step = WIDTH >> 3;
-	a->sprite_x = 512 * a->sprite_x / a->sprite_y;
-	a->sprite_y = 512 * a->sprite_z / a->sprite_y;
-	a->sprite_x += (WIDTH >> 4);
-	a->sprite_y += (HEIGHT >> 4);
-	// printf("pa: %f, x: %f, y: %f, px: %f, py: %f, ", a->pa, x, y, ray->px, ray->py);
-	// printf("s_x: %f, s_y: %f, dist: %f\n", a->sprite_x, a->sprite_y, a->dist);
-	if (a->sprite_x > 0 && a->sprite_x < (WIDTH >> 3) && a->sprite_y > 0 && a->sprite_y < a->dist)
-		draw_sprite_line(a, i);
-	a->sprite_x = spr.x;
-	a->sprite_y = spr.y;
+	a->sx = (a->s_px - a->px) * 64;
+	a->sy = (a->s_py - a->py) * 64;
+	spr.z = 10;
+	spr.cs = cos(degree_to_radian(a->pa));
+	spr.sn = sin(degree_to_radian(a->pa));
+	spr.x = a->sy * spr.cs + a->sx * spr.sn;
+	spr.y = a->sx * spr.cs - a->sy * spr.sn;
+	a->b = spr.y;
+	a->sx = spr.x * 864.0 / spr.y + (WIDTH / 2);
+	a->sy = spr.z * 864.0 / spr.y + (HEIGHT / 2);
+	a->spr_scale = 8 * HEIGHT / a->b;
+	if (a->spr_scale < 0)
+		a->spr_scale = 0;
+	else if (a->spr_scale > WIDTH / 2)
+		a->spr_scale = WIDTH / 2;
+	a->t_x = 0;
+	a->t_x_st = 63.0 / a->spr_scale;
+	a->t_y_st = 64.0 / a->spr_scale;
+}
+
+void	draw_sprite(t_data *a, int i)
+{
+	double	y;
+
+	if (a->sprite == '0')
+		return ;
+	if (i >= (a->sx - a->spr_scale / 2)	&& i < (a->sx + a->spr_scale / 2) && a->b > 0 && a->b < a->dist)
+	{
+		a->t_y = 62;
+		y = 0;
+		while (y < a->spr_scale)
+		{
+			put_sprite_pixel(a, i, a->sy - y);
+			a->t_y -= a->t_y_st;
+			if (a->t_y < 0)
+				a->t_y = 0;
+			y++;
+		}
+		a->t_x += a->t_x_st;
+	}
 }

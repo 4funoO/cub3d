@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:22:25 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/27 18:04:13 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:44:32 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,15 @@ void	ft_game(t_data *a)
 	a->pdx = cos(degree_to_radian(a->pa));
 	a->pdy = -1 * sin(degree_to_radian(a->pa));
 	a->key_num = '1';
-	if (a->sprite_x > 0)
+	if (a->s_px > 0)
 	{
 		a->key_num = '0';
 		a->sprite = '1';
 	}
 	if (KEYS == '1')
 		a->key_num = '1';
-	a->sprite_x = (int)a->sprite_x << 6;
-	a->sprite_y = (int)a->sprite_y << 6;
+	a->s_px += 0.5;
+	a->s_py += 0.5;
 	a->mlx = mlx_init();
 	take_img_walls(a);
 	take_img_door(a);
@@ -113,3 +113,5 @@ void	ft_game(t_data *a)
 	mlx_loop_hook(a->mlx, ft_game_start, a);
 	mlx_loop(a->mlx);
 }
+	// a->s_px = a->s_px * 64;
+	// a->s_py = a->s_py * 64;

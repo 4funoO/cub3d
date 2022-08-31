@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:29:19 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/29 13:49:57 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:41:39 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define ANGLE    60.0 / WIDTH
 # define X_SPR    WIDTH >> 3
 # define Y_SPR    HEIGHT >> 3
-# define KEYS     '1'
+# define KEYS     '0'
 
 # include "libft/libft.h"
 # include "mlx/mlx.h"
@@ -47,6 +47,8 @@ typedef struct s_sprite {
 	double	x;
 	double	y;
 	double	z;
+	double	sn;
+	double	cs;
 }				t_sprite;
 
 typedef struct s_data {
@@ -89,10 +91,16 @@ typedef struct s_data {
 	int		step_num;
 	char	open;
 	char	sprite;
-	double	sprite_x;
-	double	sprite_y;
-	double	sprite_z;
-	double	spr_step;
+	double	s_px;
+	double	s_py;
+	double	spr_scale;
+	double	t_x;
+	double	t_y;
+	double	t_x_st;
+	double	t_y_st;
+	double	b;
+	double	sy;
+	double	sx;
 	t_list	*map;
 }				t_data;
 
@@ -107,7 +115,8 @@ void	ft_map_check(t_list	*tmp, t_data *a);
 void	ft_map_init(char *line, t_data *a, int fd);
 
 void	ft_minimap_render(t_list *map, t_data *a);
-void	draw_sprite(t_data *a, t_ray *ray, int i);
+void	sprite_init(t_data *a);
+void	draw_sprite(t_data *a, int i);
 int		ft_game_start(t_data *a);
 void	ft_game(t_data *a);
 int		ft_key_hook(int keycode, t_data *a);

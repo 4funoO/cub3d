@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:29:09 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/29 13:33:49 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:45:45 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ void	ft_map_initialize(t_data *a)
 	a->mouse = '\0';
 	a->key_num = '0';
 	a->sprite = '0';
-	a->sprite_y = 1;
-	a->sprite_z = 20;
+	a->s_py = 1;
 	a->d_x = -1;
 	a->d_y = -1;
 	while (i < 8)
@@ -66,14 +65,10 @@ void	ft_map_initialize(t_data *a)
 	}
 }
 
-int	main()//int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_data	a;
-	int	argc = 2;
-	char *argv[2];
-	char *line = "map.cub";
 
-	argv[1] = line;
 	if (argc == 2)
 	{
 		ft_map_initialize(&a);
