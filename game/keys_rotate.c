@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:28:48 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/31 19:18:41 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 19:29:34 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	e_key(t_data *a)
 		a->open = '1';
 		a->step_num = 1;
 	}
-	else if (mx == a->d_x && my == a->d_y && a->key_num == '1')
+	else if (mx == a->d_x && my == a->d_y && a->key_num == '1'
+		&& ((int)a->px != a->d_x || (int)a->py != a->d_y))
 	{
 		if (a->open == '1')
 		{
