@@ -6,11 +6,51 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:45:23 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/26 13:10:37 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 16:17:00 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
+
+void	add_rows_to_map(t_data *a)
+{
+	char	*tmp;
+	int		i;
+
+	while (a->map_height < 10)
+	{
+		i = 0;
+		tmp = malloc(a->map_width + 1);
+		while (i < a->map_width)
+		{
+			tmp[i] = ' ';
+			i++;
+		}
+		tmp[i] = '\0';
+		ft_lstadd_back(&a->map, ft_lstnew(tmp));
+		a->map_height++;
+	}
+}
+
+void	put_spaces_if_not_rect(t_list *map, t_data *a)
+{
+	char	*tmp;
+
+	if (a->map_width < 10)
+		a->map_width = 10;
+	while (map)
+	{
+		while ((int)ft_strlen(map->content) < a->map_width)
+		{
+			tmp = map->content;
+			map->content = ft_strjoin(map->content, " ");
+			free(tmp);
+		}
+		map = map->next;
+	}
+	if (a->map_height < 10)
+		add_rows_to_map(a);
+}
 
 int	ft_map_line_check(char *line, t_data *a)
 {
@@ -61,6 +101,7 @@ void	ft_map_init(char *line, t_data *a, int fd)
 		a->map_height++;
 	}
 	ft_map_check(a->map, a);
+	put_spaces_if_not_rect(a->map, a);
 }
 
 void	ft_map_process(t_data *a, char *argv)

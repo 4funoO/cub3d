@@ -1,7 +1,7 @@
-NO ./textures/mtrx_blue.xpm
-EA ./textures/mtrx_hrglf.xpm     
-WE ./textures/mtrx_green.xpm
-SO ./textures/mtrx_ptrn.xpm
+NO img/greystone.xpm
+EA img/mossy.xpm
+WE img/stone.xpm
+SO img/stone2.xpm
 
 F 220,100,0
 C 225,30,0
@@ -11,3 +11,4 @@ C 225,30,0
 101001
 1100N1
 111111
+   
