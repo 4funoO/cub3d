@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:22:25 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/31 13:22:22 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 15:44:25 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,6 @@
 
 void	take_img_door(t_data *a)
 {
-	int		i;
-
-	i = 64;
-	a->door = mlx_xpm_file_to_image(a->mlx, "img/door.xpm", &i, &i);
-	a->addr[6] = mlx_get_data_addr(a->door, &a->bits_per_pixel[6],
-			&a->line_length[6], &a->endian[6]);
-	a->key = mlx_xpm_file_to_image(a->mlx, "img/key.xpm", &i, &i);
-	a->addr[7] = mlx_get_data_addr(a->key, &a->bits_per_pixel[7],
-			&a->line_length[7], &a->endian[7]);
 	if (!a->ea || !a->so || !a->we || !a->no || !a->key || !a->door)
 	{
 		write(2, "Error!\nImage file is missing or unavailable!\n", 45);
@@ -30,6 +21,18 @@ void	take_img_door(t_data *a)
 		free(a->mlx);
 		exit(EXIT_FAILURE);
 	}
+	a->addr[2] = mlx_get_data_addr(a->no, &a->bits_per_pixel[2],
+			&a->line_length[2], &a->endian[2]);
+	a->addr[3] = mlx_get_data_addr(a->so, &a->bits_per_pixel[3],
+			&a->line_length[3], &a->endian[3]);
+	a->addr[4] = mlx_get_data_addr(a->we, &a->bits_per_pixel[4],
+			&a->line_length[4], &a->endian[4]);
+	a->addr[5] = mlx_get_data_addr(a->ea, &a->bits_per_pixel[5],
+			&a->line_length[5], &a->endian[5]);
+	a->addr[6] = mlx_get_data_addr(a->door, &a->bits_per_pixel[6],
+			&a->line_length[6], &a->endian[6]);
+	a->addr[7] = mlx_get_data_addr(a->key, &a->bits_per_pixel[7],
+			&a->line_length[7], &a->endian[7]);
 }
 
 void	take_img_walls(t_data *a)
@@ -40,24 +43,18 @@ void	take_img_walls(t_data *a)
 	i = 64;
 	tmp = a->no;
 	a->no = mlx_xpm_file_to_image(a->mlx, a->no, &i, &i);
-	a->addr[2] = mlx_get_data_addr(a->no, &a->bits_per_pixel[2],
-			&a->line_length[2], &a->endian[2]);
 	free(tmp);
 	tmp = a->so;
 	a->so = mlx_xpm_file_to_image(a->mlx, a->so, &i, &i);
-	a->addr[3] = mlx_get_data_addr(a->so, &a->bits_per_pixel[3],
-			&a->line_length[3], &a->endian[3]);
 	free(tmp);
 	tmp = a->we;
 	a->we = mlx_xpm_file_to_image(a->mlx, a->we, &i, &i);
-	a->addr[4] = mlx_get_data_addr(a->we, &a->bits_per_pixel[4],
-			&a->line_length[4], &a->endian[4]);
 	free(tmp);
 	tmp = a->ea;
 	a->ea = mlx_xpm_file_to_image(a->mlx, a->ea, &i, &i);
-	a->addr[5] = mlx_get_data_addr(a->ea, &a->bits_per_pixel[5],
-			&a->line_length[5], &a->endian[5]);
 	free(tmp);
+	a->door = mlx_xpm_file_to_image(a->mlx, "img/door.xpm", &i, &i);
+	a->key = mlx_xpm_file_to_image(a->mlx, "img/key.xpm", &i, &i);
 }
 
 void	ft_check_map_init(t_data *a)
