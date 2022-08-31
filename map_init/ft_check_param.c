@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_parameters.c                              :+:      :+:    :+:   */
+/*   ft_check_param.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:58:19 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/06 14:09:07 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 18:47:08 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	ft_f_c_colours_sub(char *line, int j, t_data *a)
 	int	i;
 
 	i = 0;
-	while (line[i] && line[i] != ',' && ft_isdigit(line[i]))
+	while (line[i] && line[i] != ','
+		&& (ft_isdigit(line[i]) || line[i] == ' ' || line[i] == '\t'))
 		i++;
 	if (j < 2 && line[i] != ',')
 		ft_error("Invalid colour value\n", a);
