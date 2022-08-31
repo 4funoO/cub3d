@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:29:09 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/31 12:45:45 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 13:54:22 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,22 @@ int	ft_check_format(char *s, char *s2)
 	return (1);
 }
 
+void	ft_map_initialize_sub(t_data *a)
+{
+	a->map_height = 0;
+	a->map_width = 0;
+	a->player = '\0';
+	a->c[0] = -1;
+	a->f[0] = -1;
+	a->mouse = '\0';
+	a->key_num = '0';
+	a->sprite = '0';
+	a->s_py = 1;
+	a->d_x = -1;
+	a->d_y = -1;
+	a->angle = 60.0 / WIDTH;
+}
+
 void	ft_map_initialize(t_data *a)
 {
 	int	i;
@@ -39,11 +55,6 @@ void	ft_map_initialize(t_data *a)
 	a->ea = NULL;
 	a->we = NULL;
 	a->so = NULL;
-	a->map_height = 0;
-	a->map_width = 0;
-	a->player = '\0';
-	a->c[0] = -1;
-	a->f[0] = -1;
 	a->map = NULL;
 	a->line = NULL;
 	a->mlx = NULL;
@@ -52,17 +63,12 @@ void	ft_map_initialize(t_data *a)
 	a->minimap = NULL;
 	a->key = NULL;
 	a->door = NULL;
-	a->mouse = '\0';
-	a->key_num = '0';
-	a->sprite = '0';
-	a->s_py = 1;
-	a->d_x = -1;
-	a->d_y = -1;
 	while (i < 8)
 	{
 		a->addr[i] = NULL;
 		i++;
 	}
+	ft_map_initialize_sub(a);
 }
 
 int	main(int argc, char **argv)

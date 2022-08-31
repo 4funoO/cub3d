@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 12:43:18 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/27 19:06:16 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 13:01:26 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	d_key(t_data *a)
 		if (c == 'K')
 		{
 			a->key_num = '1';
-			a->sprite ='0';
+			a->sprite = '0';
 			put_map_symbol(mx, my, a, '0');
 		}
 		a->px -= a->pdy * 0.2;
@@ -113,16 +113,7 @@ int	ft_key_hook(int keycode, t_data *a)
 	if (keycode == 53)
 		ft_close(a);
 	else if (keycode == 12)
-	{
-		if (a->mouse == '\0')
-		{
-			a->mouse = '1';
-			mlx_mouse_show();
-			return (0);
-		}
-		a->mouse = '\0';
-		mlx_mouse_hide();
-	}
+		q_key(a);
 	else if (keycode == 13)
 		w_key(a);
 	else if (keycode == 1)

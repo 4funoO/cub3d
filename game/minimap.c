@@ -6,19 +6,11 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:30:22 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/29 10:43:06 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 13:50:07 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
-
-void	my_mlx_pixel_put_mini(t_data *a, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = a->addr[1] + ((y * a->line_length[0]) + x * (a->bits_per_pixel[0] / 8));
-	*(unsigned int *)dst = color;
-}
 
 void	ft_wall_minimap(t_data *a, int x, int y, int k)
 {
@@ -36,24 +28,18 @@ void	ft_wall_minimap(t_data *a, int x, int y, int k)
 					j + y * HEIGHT / 50, 0x0FF000000);
 			else
 				my_mlx_pixel_put_mini(a, i + x * WIDTH / 50,
-				j + y * HEIGHT / 50, k);
+					j + y * HEIGHT / 50, k);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	ft_player_minimap(t_data *a, float x, float y)
+void	ft_player_minimap(t_data *a, double x, double y)
 {
-	float	j;
-	float	i;
+	double	j;
+	double	i;
 
-	if (a->py < 5)
-		y = a->py;
-	else if (a->map_height - a->py < 5)
-		y = 10 - (a->map_height - a->py);
-	else
-		y = 5 + (a->py - (int)a->py);
 	i = 0.5 - WIDTH / 250;
 	while (i <= WIDTH / 250)
 	{
@@ -68,7 +54,27 @@ void	ft_player_minimap(t_data *a, float x, float y)
 	}
 }
 
-void	ft_sub_minimap(t_list *map, t_data *a, float x, float y)
+void	ft_player_init(t_data *a)
+{
+	double	x;
+	double	y;
+
+	if (a->px < 5)
+		x = a->px;
+	else if (a->map_width - a->px < 5)
+		x = 10 - (a->map_width - a->px);
+	else
+		x = 4 + (a->px - (int)a->px);
+	if (a->py < 5)
+		y = a->py;
+	else if (a->map_height - a->py < 5)
+		y = 10 - (a->map_height - a->py);
+	else
+		y = 5 + (a->py - (int)a->py);
+	ft_player_minimap(a, x, y);
+}
+
+void	ft_sub_minimap(t_list *map, t_data *a, double x)
 {
 	int		i;
 	int		j;
@@ -92,19 +98,13 @@ void	ft_sub_minimap(t_list *map, t_data *a, float x, float y)
 		j++;
 		map = map->next;
 	}
-	if (a->px < 5)
-		x = a->px;
-	else if (a->map_width - a->px < 5)
-		x = 10 - (a->map_width - a->px);
-	else
-		x = 4 + (a->px - (int)a->px);
-	ft_player_minimap(a, x, y);
+	ft_player_init(a);
 }
 
 void	ft_minimap_render(t_list *map, t_data *a)
 {
-	float	y;
-	float	x;
+	double	y;
+	double	x;
 
 	if (a->minimap)
 		mlx_destroy_image(a->mlx, a->minimap);
@@ -123,6 +123,6 @@ void	ft_minimap_render(t_list *map, t_data *a)
 		x = a->map_width - 10;
 	else
 		x = a->px - 4;
-	ft_sub_minimap(map, a, x, y);
+	ft_sub_minimap(map, a, x);
 	mlx_put_image_to_window(a->mlx, a->win, a->minimap, 0, 0);
 }

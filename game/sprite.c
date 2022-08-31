@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 14:14:05 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/31 12:43:21 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 13:09:31 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	put_sprite_pixel(t_data *a, int x, int y)
 	i = (int)a->t_x;
 	j = (int)a->t_y;
 	dst = a->addr[7] + ((j * a->line_length[7])
-		+ i * (a->bits_per_pixel[7] / 8));
+			+ i * (a->bits_per_pixel[7] / 8));
 	if (*(unsigned int *)dst != 0x000FF00FF)
 		my_mlx_pixel_put(a, x, y, *(unsigned int *)dst);
 }
@@ -58,7 +58,8 @@ void	draw_sprite(t_data *a, int i)
 
 	if (a->sprite == '0')
 		return ;
-	if (i >= (a->sx - a->spr_scale / 2)	&& i < (a->sx + a->spr_scale / 2) && a->b > 0 && a->b < a->dist)
+	if (i >= (a->sx - a->spr_scale / 2) && i < (a->sx + a->spr_scale / 2)
+		&& a->b > 0 && a->b < a->dist)
 	{
 		a->t_y = 62;
 		y = 0;

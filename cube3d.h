@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:29:19 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/31 12:41:39 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 13:54:51 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,10 @@
 
 # define HEIGHT   1000
 # define WIDTH    1000
-# define ANGLE    60.0 / WIDTH
-# define X_SPR    WIDTH >> 3
-# define Y_SPR    HEIGHT >> 3
-# define KEYS     '0'
+# define KEYS     '1'
 
 # include "libft/libft.h"
 # include "mlx/mlx.h"
-#   include "stdio.h"
 # include <fcntl.h>
 # include <math.h>
 
@@ -41,6 +37,8 @@ typedef struct s_ray {
 	double	ry;
 	int		side;
 	int		sideh;
+	double	atan_ra;
+	double	tan_ra;
 }				t_ray;
 
 typedef struct s_sprite {
@@ -101,6 +99,7 @@ typedef struct s_data {
 	double	b;
 	double	sy;
 	double	sx;
+	double	angle;
 	t_list	*map;
 }				t_data;
 
@@ -115,21 +114,24 @@ void	ft_map_check(t_list	*tmp, t_data *a);
 void	ft_map_init(char *line, t_data *a, int fd);
 
 void	ft_minimap_render(t_list *map, t_data *a);
+void	my_mlx_pixel_put_mini(t_data *a, int x, int y, int color);
 void	sprite_init(t_data *a);
 void	draw_sprite(t_data *a, int i);
 int		ft_game_start(t_data *a);
 void	ft_game(t_data *a);
 int		ft_key_hook(int keycode, t_data *a);
 void	ft_ray_cast(t_data *a, t_ray *ray);
+void	ft_vertical_ray(t_data *a, t_ray *ray);
 void	draw_line(t_data *a, int i);
-char	get_map_symbol(int	mx, int my, t_data *a);
+char	get_map_symbol(int mx, int my, t_data *a);
 void	put_map_symbol(int mx, int my, t_data *a, char c);
 void	my_mlx_pixel_put(t_data *a, int x, int y, int color);
 double	ft_distance(t_ray *ray);
-double	degree_to_radian(double a) ;
+double	degree_to_radian(double a);
 double	fix_angle(double a);
 void	left_key(t_data *a);
 void	right_key(t_data *a);
 void	e_key(t_data *a);
+void	q_key(t_data *a);
 
 #endif

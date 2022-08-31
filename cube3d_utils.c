@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 12:44:15 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/26 12:16:48 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 15:25:51 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,5 @@ int	ft_close(t_data *a)
 {
 	mlx_destroy_window(a->mlx, a->win);
 	ft_free(a);
-	// system("leaks cub3d");
 	exit(EXIT_SUCCESS);
 }

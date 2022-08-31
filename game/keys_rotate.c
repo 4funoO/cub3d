@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:28:48 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/27 13:16:28 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 13:10:19 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,16 @@ void	e_key(t_data *a)
 		a->open = '1';
 		a->step_num = 1;
 	}
+}
+
+void	q_key(t_data *a)
+{
+	if (a->mouse == '\0')
+	{
+		a->mouse = '1';
+		mlx_mouse_show();
+		return ;
+	}
+	a->mouse = '\0';
+	mlx_mouse_hide();
 }

@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:22:25 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/31 12:44:32 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 13:22:22 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,3 @@ void	ft_game(t_data *a)
 	mlx_loop_hook(a->mlx, ft_game_start, a);
 	mlx_loop(a->mlx);
 }
-	// a->s_px = a->s_px * 64;
-	// a->s_py = a->s_py * 64;
