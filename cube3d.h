@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:29:19 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/31 17:39:36 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 19:09:12 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,12 @@ typedef struct s_data {
 	void	*we;
 	void	*minimap;
 	void	*key;
+	void	*key2;
 	void	*door;
-	char	*addr[8];
-	int		bits_per_pixel[8];
-	int		line_length[8];
-	int		endian[8];
+	char	*addr[9];
+	int		bits_per_pixel[9];
+	int		line_length[9];
+	int		endian[9];
 	int		c[3];
 	int		f[3];
 	char	*line;
@@ -100,6 +101,8 @@ typedef struct s_data {
 	double	sy;
 	double	sx;
 	double	angle;
+	int		loop;
+	char	anim;
 	t_list	*map;
 }				t_data;
 
@@ -133,5 +136,6 @@ void	left_key(t_data *a);
 void	right_key(t_data *a);
 void	e_key(t_data *a);
 void	q_key(t_data *a);
+void	ft_loop(t_data *a);
 
 #endif

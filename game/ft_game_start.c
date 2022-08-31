@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:26 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/31 17:57:26 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 19:09:18 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	ft_game_start(t_data *a)
 {
 	int	x;
 
+	ft_loop(a);
 	ft_map_render(a);
 	ft_minimap_render(a->map, a);
 	x = a->mouse_x;

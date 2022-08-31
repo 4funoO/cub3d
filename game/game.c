@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:22:25 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/31 15:49:32 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 19:06:57 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	take_img_door(t_data *a)
 {
-	if (!a->ea || !a->so || !a->we || !a->no || !a->key || !a->door)
+	if (!a->ea || !a->so || !a->we || !a->no || !a->key || !a->door || !a->key2)
 	{
 		write(2, "Error!\nImage file is missing or unavailable!\n", 45);
 		ft_lstfree(a->map);
@@ -33,6 +33,8 @@ void	take_img_door(t_data *a)
 			&a->line_length[6], &a->endian[6]);
 	a->addr[7] = mlx_get_data_addr(a->key, &a->bits_per_pixel[7],
 			&a->line_length[7], &a->endian[7]);
+	a->addr[8] = mlx_get_data_addr(a->key2, &a->bits_per_pixel[8],
+			&a->line_length[8], &a->endian[8]);
 }
 
 void	take_img_walls(t_data *a)
@@ -55,6 +57,7 @@ void	take_img_walls(t_data *a)
 	free(tmp);
 	a->door = mlx_xpm_file_to_image(a->mlx, "img/door.xpm", &i, &i);
 	a->key = mlx_xpm_file_to_image(a->mlx, "img/key.xpm", &i, &i);
+	a->key2 = mlx_xpm_file_to_image(a->mlx, "img/key2.xpm", &i, &i);
 }
 
 void	ft_check_map_init(t_data *a)
