@@ -6,11 +6,11 @@
 #    By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 13:29:01 by doreshev          #+#    #+#              #
-#    Updated: 2022/08/31 13:31:02 by doreshev         ###   ########.fr        #
+#    Updated: 2022/08/31 18:15:16 by doreshev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
 
 LIBFTDIR = ./libft
 

@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:57:18 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/06 16:53:07 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 18:16:08 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_atoi(const char *str)
 	else if (*str == '+')
 		str++;
 	if (ft_isdigit(*str) == 0)
-		return (0);
+		return (-1);
 	while (ft_isdigit(*str) == 1)
 	{
 		i = i * 10 + (*str - 48);
