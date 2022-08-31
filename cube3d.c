@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:29:09 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/31 19:08:40 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 19:44:10 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_map_initialize(t_data *a)
 	a->minimap = NULL;
 	a->key = NULL;
 	a->door = NULL;
-	while (i < 8)
+	while (i < 9)
 	{
 		a->addr[i] = NULL;
 		i++;

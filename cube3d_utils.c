@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 12:44:15 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/31 16:16:09 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 19:36:55 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_free_addr(char **addr)
 	if (addr == NULL)
 		return ;
 	i = 0;
-	while (i < 8)
+	while (i < 9)
 	{
 		free(addr[i]);
 		addr[i] = NULL;
