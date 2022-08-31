@@ -6,7 +6,7 @@
 #    By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 13:29:01 by doreshev          #+#    #+#              #
-#    Updated: 2022/08/31 18:15:16 by doreshev         ###   ########.fr        #
+#    Updated: 2022/08/31 18:27:08 by doreshev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CC = cc
 
 RM = rm -f
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
 
 SRC =	cube3d.c \
 		cube3d_utils.c \
