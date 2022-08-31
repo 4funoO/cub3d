@@ -1,6 +1,6 @@
-NO img/greystone.xpm
+NO img/wood.xpm
 EA img/mossy.xpm
-WE img/stone.xpm
+WE img/ornament.xpm
 SO img/stone2.xpm
 
 F 220,100,0
@@ -11,4 +11,3 @@ C 225,30,0
 101001
 1100N1
 111111
-   

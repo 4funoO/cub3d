@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:26 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/31 12:59:51 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:57:26 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ void	ft_map_render(t_data *a)
 	if (a->img)
 		mlx_destroy_image(a->mlx, a->img);
 	a->img = mlx_new_image(a->mlx, WIDTH, HEIGHT);
+	if (!a->img)
+	{
+		write(2, "Error\nImage creation failed!\n", 29);
+		ft_close(a);
+	}
 	a->addr[1] = mlx_get_data_addr(a->img, &a->bits_per_pixel[1],
 			&a->line_length[1], &a->endian[1]);
 	sprite_init(a);

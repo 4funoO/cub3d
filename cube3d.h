@@ -6,7 +6,7 @@
 /*   By: doreshev <doreshev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:29:19 by doreshev          #+#    #+#             */
-/*   Updated: 2022/08/31 15:43:30 by doreshev         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:39:36 by doreshev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define HEIGHT   1000
 # define WIDTH    1000
-# define KEYS     '1'
+# define KEYS     '0'
 
 # include "libft/libft.h"
 # include "mlx/mlx.h"
