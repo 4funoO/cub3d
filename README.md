@@ -1,3 +1,3 @@
 # cub3d
 
-Game using raycasting technologies! Back to 2000s!
+3D Game in old style! Back to 2000s!
